@@ -1,3 +1,7 @@
+# Live APP Deployed in Cloud Run[GCP]
+### 🌐 Live App URL  
+<a href="https://map-fe-320668246657.us-central1.run.app" target="_blank">Click here to access the app</a>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
