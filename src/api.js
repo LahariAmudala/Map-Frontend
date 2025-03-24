@@ -21,3 +21,12 @@ export const fetchDashboardData = async (token) => {
     throw error.response?.data?.message || 'Failed to fetch dashboard data';
   }
 };
+
+export const fetchHealth = async () => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/health`);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data?.message || 'Failed to fetch health check data';
+  }
+};
