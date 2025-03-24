@@ -1,0 +1,31 @@
+steps:
+  # Step 1: Build and push the Docker image to Google Artifact Registry
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - "build"
+      - "-t"
+      - "us-central1-docker.pkg.dev/$PROJECT_ID/namma-angadi/map-fe:$SHORT_SHA"
+      - "."
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - "push"
+      - "us-central1-docker.pkg.dev/$PROJECT_ID/namma-angadi/map-fe:$SHORT_SHA"
+
+  # Step 2: Deploy to Cloud Run
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "map-fe"
+      - "--image=us-central1-docker.pkg.dev/$PROJECT_ID/namma-angadi/map-fe:$SHORT_SHA"
+      - "--platform=managed"
+      - "--region=us-central1"
+      - "--allow-unauthenticated"
+      - "--port=8080"
+logsBucket: 'gs://charged-muse-376504-iac-tf-state/$REPO_NAME/$BRANCH_NAME/logs'
+options:
+  logging: GCS_ONLY      
+
+images:
+  - "us-central1-docker.pkg.dev/$PROJECT_ID/namma-angadi/map-fe:$SHORT_SHA"
