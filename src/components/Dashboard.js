@@ -38,14 +38,14 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/');
+    navigate('/login');
   };
 
   if (error) {
     return (
       <div>
         <h2>Error: {error}</h2>
-        <button onClick={() => navigate('/')}>Go to Login</button>
+        <button onClick={() => navigate('/login')}>Go to Login</button>
       </div>
     );
   }
