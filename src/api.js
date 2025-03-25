@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// const API_URL = 'http://localhost:5000/api';
 const REACT_APP_API_URL='https://map-backend-320668246657.us-central1.run.app/api'
 
 export const login = async (username, password) => {
