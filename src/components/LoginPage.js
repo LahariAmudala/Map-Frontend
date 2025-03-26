@@ -8,17 +8,33 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  //const handleLogin = async (e) => {
+    //e.preventDefault();
+    //try {
+      //const { token } = await login(username, password);
+      //localStorage.setItem('token', token);
+      //navigate('/dashboard');
+    //} catch (err) {
+      //setError(err);
+    //}
+  //};
+
+//
+
+
+  const handleLogin = async () => {
     try {
-      const { token } = await login(username, password);
-      localStorage.setItem('token', token);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, { username, password });
+      localStorage.setItem('token', response.data.token);
+      setIsAuthenticated(true);
       navigate('/dashboard');
-    } catch (err) {
-      setError(err);
+    } catch (error) {
+      console.error('Login failed:', error.response?.data?.message || error.message);
     }
   };
 
+
+  //
   return (
     <div className='align-center p-50'>
       <h2>Login</h2>
